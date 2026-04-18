@@ -1,0 +1,45 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/Literata-ExtraBold.ttf",
+      "sha1": "922a88178be7b5f39691149b36bb9d368c38730f"
+    },
+    {
+      "path": "src/assets/fonts/Literata-ExtraBoldItalic.ttf",
+      "sha1": "119772da82b247412f2d3170c6e97ac41948b3f4"
+    },
+    {
+      "path": "src/assets/fonts/Literata-ExtraLight.ttf",
+      "sha1": "c3d489e17f479b8334b8a290d8c87078501b322c"
+    },
+    {
+      "path": "src/assets/fonts/Literata-ExtraLightItalic.ttf",
+      "sha1": "cc0db2f25697152288f1054d005ae26b32248388"
+    },
+    {
+      "path": "src/assets/fonts/Literata-LightItalic.ttf",
+      "sha1": "4cc5e815d29e6d218fd38cd944d1a1af30dc63a8"
+    },
+    {
+      "path": "src/assets/fonts/Literata-Regular.ttf",
+      "sha1": "50956a689486793abdb51918ab7275a162494c31"
+    },
+    {
+      "path": "src/assets/fonts/Literata-SemiBold.ttf",
+      "sha1": "7ad76f008403623008a7d6a3d3d0f818bb65d89b"
+    },
+    {
+      "path": "src/assets/fonts/Literata-SemiBoldItalic.ttf",
+      "sha1": "3c0c17dba0568ee7d122733ee64aaabaf466fe65"
+    },
+    {
+      "path": "src/assets/fonts/NunitoSans-Italic.ttf",
+      "sha1": "410740a6f03cfa4b36e22724178b7e9eb7920826"
+    },
+    {
+      "path": "src/assets/fonts/NunitoSans-Regular.ttf",
+      "sha1": "8c01360cd531b3c1988d314db01656c8ef45207c"
+    }
+  ]
+}
