@@ -3,6 +3,7 @@ export const pallet = {
   secondary: '#6B6358',
   neutral: '#4A4E4A',
   tertiary: '#C4A66A',
+  background: '#FAF6F0',
   error: '#B83230',
   variant: {
     neutral: {

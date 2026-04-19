@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import RootStack from './RootStack';
 import { navigationRef } from './utils';
 import { useLogger } from '@react-navigation/devtools';
+import { StatusBar } from 'react-native';
 
 function RootApp() {
   useLogger(navigationRef);
@@ -12,6 +13,7 @@ function RootApp() {
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView>
+        <StatusBar barStyle={'dark-content'} />
         <NavigationContainer ref={navigationRef}>
           <RootStack />
         </NavigationContainer>
