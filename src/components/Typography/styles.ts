@@ -92,7 +92,7 @@ const typographyStyle = StyleSheet.create({
     lineHeight: 20,
     letterSpacing: 0.1,
     fontWeight: '500',
-    fontFamily: fonts.nunito.regular,
+    fontFamily: fonts.nunito.bold,
     color: pallet.variant.neutral['900'],
   },
   labelMedium: {
@@ -100,7 +100,7 @@ const typographyStyle = StyleSheet.create({
     lineHeight: 16,
     letterSpacing: 0.5,
     fontWeight: '500',
-    fontFamily: fonts.nunito.regular,
+    fontFamily: fonts.nunito.bold,
     color: pallet.variant.neutral['900'],
   },
   labelSmall: {
@@ -108,7 +108,7 @@ const typographyStyle = StyleSheet.create({
     lineHeight: 16,
     letterSpacing: 0.5,
     fontWeight: '500',
-    fontFamily: fonts.nunito.regular,
+    fontFamily: fonts.nunito.bold,
     color: pallet.variant.neutral['900'],
   },
 
@@ -125,7 +125,7 @@ const typographyStyle = StyleSheet.create({
     fontSize: 14,
     lineHeight: 20,
     letterSpacing: 0,
-    fontFamily: fonts.nunito.regular,
+    fontFamily: fonts.nunito.bold,
     textDecorationLine: 'underline',
     color: pallet.primary,
   },
@@ -133,7 +133,7 @@ const typographyStyle = StyleSheet.create({
     fontSize: 12,
     lineHeight: 16,
     letterSpacing: 0,
-    fontFamily: fonts.nunito.regular,
+    fontFamily: fonts.nunito.bold,
     textDecorationLine: 'underline',
     color: pallet.primary,
   },
@@ -144,7 +144,7 @@ const typographyStyle = StyleSheet.create({
     lineHeight: 24,
     letterSpacing: 0,
     fontWeight: '500',
-    fontFamily: fonts.nunito.regular,
+    fontFamily: fonts.nunito.bold,
     color: pallet.variant.neutral['0'],
   },
 });

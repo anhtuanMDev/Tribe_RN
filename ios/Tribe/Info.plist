@@ -56,16 +56,17 @@
 	<false/>
 	<key>UIAppFonts</key>
 	<array>
-		<string>NunitoSans-Italic.ttf</string>
 		<string>Literata-SemiBoldItalic.ttf</string>
 		<string>Literata-ExtraLight.ttf</string>
 		<string>Literata-ExtraBold.ttf</string>
 		<string>Literata-SemiBold.ttf</string>
-		<string>NunitoSans-Regular.ttf</string>
 		<string>Literata-Regular.ttf</string>
 		<string>Literata-LightItalic.ttf</string>
 		<string>Literata-ExtraBoldItalic.ttf</string>
 		<string>Literata-ExtraLightItalic.ttf</string>
+		<string>NunitoSans-Italic.ttf</string>
+		<string>NunitoSans-Regular.ttf</string>
+		<string>NunitoSans-Bold.ttf</string>
 	</array>
 </dict>
 </plist>

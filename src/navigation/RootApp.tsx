@@ -6,6 +6,7 @@ import RootStack from './RootStack';
 import { navigationRef } from './utils';
 import { useLogger } from '@react-navigation/devtools';
 import { StatusBar } from 'react-native';
+import { pallet } from '../config/pallet';
 
 function RootApp() {
   useLogger(navigationRef);
@@ -13,7 +14,7 @@ function RootApp() {
   return (
     <SafeAreaProvider>
       <GestureHandlerRootView>
-        <StatusBar barStyle={'dark-content'} />
+        <StatusBar translucent={true} barStyle={'dark-content'} backgroundColor={'transparent'} />
         <NavigationContainer ref={navigationRef}>
           <RootStack />
         </NavigationContainer>

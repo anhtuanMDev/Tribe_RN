@@ -8,6 +8,7 @@ const buttonStyle = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 16,
     backgroundColor: pallet.primary,
+    overflow: 'hidden',
   },
 
   secondary: {
@@ -15,6 +16,7 @@ const buttonStyle = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 16,
     backgroundColor: pallet.secondary,
+    overflow: 'hidden',
   },
 
   tertiary: {
@@ -22,6 +24,7 @@ const buttonStyle = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 16,
     backgroundColor: pallet.tertiary,
+    overflow: 'hidden',
   },
 
   error: {
@@ -29,22 +32,25 @@ const buttonStyle = StyleSheet.create({
     paddingVertical: 12,
     borderRadius: 16,
     backgroundColor: pallet.error,
+    overflow: 'hidden',
   },
 
   outline: {
     borderWidth: 1,
     borderRadius: 16,
     borderColor: pallet.primary,
-    backgroundColor: 'transparent',
+    backgroundColor: pallet.background,
     paddingHorizontal: 24,
     paddingVertical: 12,
+    overflow: 'hidden',
   },
 
   // icon 14x14
   icon: {
     padding: 17,
-    borderRadius: Infinity,
+    borderRadius: 360,
     backgroundColor: pallet.primary,
+    overflow: 'hidden',
   },
 
   // icon 20x20
@@ -54,6 +60,7 @@ const buttonStyle = StyleSheet.create({
     borderWidth: 1,
     borderColor: convertAlpha(30, pallet.variant.neutral['500']),
     backgroundColor: pallet.variant.neutral['200'],
+    overflow: 'hidden',
   },
 });
 

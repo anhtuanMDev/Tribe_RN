@@ -1,17 +1,20 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
+import { SafeAreaView } from 'react-native-safe-area-context'
+import { pallet } from '../../config/pallet'
 
 function HomeScreen() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={[styles.container]}>
 
-    </View>
+    </SafeAreaView>
   )
 }
 
 const styles = StyleSheet.create({
   container: {
-
+    backgroundColor: pallet.background,
+    flex: 1,
   },
 })
 

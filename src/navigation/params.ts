@@ -7,4 +7,6 @@ export const ROUTES = {
 
   FLOW_BOTTOM: 'BOTTOMTAB',
   HOME: 'Home',
+  NOTIFICATION: 'Notification',
+  POST: 'Post',
 } as const;

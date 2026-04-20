@@ -2,6 +2,7 @@ export const fonts = {
   nunito: {
     regular: 'NunitoSans-Regular',
     italic: 'NunitoSans-Italic',
+    bold: 'NunitoSans-Bold',
   },
 
   literata: {

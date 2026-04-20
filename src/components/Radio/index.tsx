@@ -56,15 +56,9 @@ function Item({ value, style, label }: RadioItemProps) {
       cancelAnimation(scale);
 
       if (isSelected) {
-        scale.value = withSequence(
-          withTiming(1.2, { duration: 120 }),
-          withSpring(1),
-        );
+        scale.value = withTiming(1.4, { duration: 320 });
       } else {
-        scale.value = withSequence(
-          withTiming(0.5, { duration: 120 }),
-          withSpring(1),
-        );
+        scale.value = withTiming(1, { duration: 320 });
       }
     });
   }, [isSelected, scale]);
