@@ -43,19 +43,16 @@ const SLIDES = [
 
 function WalkThroughScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [displayIndex, setDisplayIndex] = useState(0); // drives text only
   const flatListRef = useRef<FlatList>(null);
 
-  // Tracks raw scroll position (0 → width * (n-1))
   const scrollX = useRef(new Animated.Value(0)).current;
-
-  // Text animation values
   const translateY = useRef(new Animated.Value(0)).current;
   const textOpacity = useRef(new Animated.Value(1)).current;
-
-  // Dot widths driven by interpolation off scrollX
   const dotWidths = useRef(SLIDES.map((_, i) => new Animated.Value(i === 0 ? 24 : 8))).current;
+  const isTappingButton = useRef(false);
 
-  const animateTextTransition = (dir: 'next' | 'prev') => {
+  const animateTextTransition = (dir: 'next' | 'prev', nextIndex: number) => {
     const outY = dir === 'next' ? -20 : 20;
     const inY = dir === 'next' ? 20 : -20;
 
@@ -68,11 +65,13 @@ function WalkThroughScreen() {
         Animated.timing(translateY, { toValue: inY, duration: 0, useNativeDriver: true }),
         Animated.timing(textOpacity, { toValue: 0, duration: 0, useNativeDriver: true }),
       ]),
+    ]).start(() => {
+      setDisplayIndex(nextIndex); // swap text only when invisible
       Animated.parallel([
         Animated.timing(translateY, { toValue: 0, duration: 200, useNativeDriver: true }),
         Animated.timing(textOpacity, { toValue: 1, duration: 200, useNativeDriver: true }),
-      ]),
-    ]).start();
+      ]).start();
+    });
   };
 
   const animateDots = (nextIndex: number) => {
@@ -86,12 +85,16 @@ function WalkThroughScreen() {
   };
 
   const onMomentumScrollEnd = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+    if (isTappingButton.current) {
+      isTappingButton.current = false;
+      return;
+    }
     const nextIndex = Math.round(e.nativeEvent.contentOffset.x / width);
     if (nextIndex === currentIndex) return;
 
     const dir = nextIndex > currentIndex ? 'next' : 'prev';
     animateDots(nextIndex);
-    animateTextTransition(dir);
+    animateTextTransition(dir, nextIndex);
     setCurrentIndex(nextIndex);
   };
 
@@ -102,33 +105,31 @@ function WalkThroughScreen() {
   const goNext = () => {
     if (currentIndex < SLIDES.length - 1) {
       const next = currentIndex + 1;
+      isTappingButton.current = true;
       animateDots(next);
-      animateTextTransition('next');
+      animateTextTransition('next', next);
       setCurrentIndex(next);
       scrollTo(next);
     } else {
-      replace(ROUTES.FLOW_BOTTOM, {
-        screen: ROUTES.HOME,
-      })
+      replace(ROUTES.FLOW_BOTTOM, { screen: ROUTES.HOME });
     }
   };
 
   const goPrev = () => {
     if (currentIndex > 0) {
       const prev = currentIndex - 1;
+      isTappingButton.current = true;
       animateDots(prev);
-      animateTextTransition('prev');
+      animateTextTransition('prev', prev);
       setCurrentIndex(prev);
       scrollTo(prev);
     }
   };
 
-  const skip = () => replace(ROUTES.FLOW_BOTTOM, {
-    screen: ROUTES.HOME,
-  });
+  const skip = () => replace(ROUTES.FLOW_BOTTOM, { screen: ROUTES.HOME });
 
   const isLast = currentIndex === SLIDES.length - 1;
-  const slide = SLIDES[currentIndex];
+  const slide = SLIDES[displayIndex]; // only change here
 
   return (
     <SafeAreaView style={styles.container}>
@@ -143,8 +144,8 @@ function WalkThroughScreen() {
         <Button
           title="Skip"
           onPress={skip}
-          level="outline"
-          textStyle={{ color: pallet.variant.neutral['600'], fontFamily: fonts.literata.regular }}
+          level="ghost"
+          textStyle={styles.headerButton}
         />
       </View>
 
@@ -214,7 +215,7 @@ function WalkThroughScreen() {
           title="Back"
           onPress={goPrev}
           level="outline"
-          textStyle={{ color: pallet.primary, fontWeight: '800' }}
+          textStyle={{ color: pallet.primary, fontWeight: '800', backgroundColor: pallet.background }}
         />
         <Button
           fullWidth
@@ -297,6 +298,7 @@ const styles = StyleSheet.create({
     gap: 16,
     marginBottom: 24,
   },
+  headerButton: { color: pallet.variant.neutral['400'], fontFamily: fonts.literata.semiBold },
 });
 
 export default WalkThroughScreen;

@@ -62,6 +62,19 @@ const buttonStyle = StyleSheet.create({
     backgroundColor: pallet.variant.neutral['200'],
     overflow: 'hidden',
   },
+
+  ghost: {
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    borderRadius: 16,
+    backgroundColor: pallet.background,
+    overflow: 'hidden',
+    elevation: 0,
+    shadowColor: 'transparent',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+  },
 });
 
 export default buttonStyle;

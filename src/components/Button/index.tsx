@@ -34,6 +34,9 @@ function Button({
   style: customStyle,
   ...rest
 }: ButtonProps) {
+
+  console.log('Skip', title);
+
   return (
     <Pressable
       {...rest}

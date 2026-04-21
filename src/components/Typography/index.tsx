@@ -8,7 +8,7 @@ export type TypographyProps = {
   style?: TextProps['style'];
 } & TextProps;
 
-function Typography({level, style: customStyle, disabled, ...rest}: TypographyProps) {
+function Typography({ level, style: customStyle, disabled, ...rest }: TypographyProps) {
   return <Text style={[typographyStyle[level], customStyle, disabled && styles.disable]} {...rest} />;
 }
 
