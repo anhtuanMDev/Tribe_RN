@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useLayoutEffect, useRef, useState } from 'react';
 import {
   Animated,
   Dimensions,
@@ -17,6 +17,7 @@ import { fonts } from '../../config/constants';
 import { pallet } from '../../config/pallet';
 import { ROUTES } from '../../navigation/params';
 import { replace } from '../../navigation/utils';
+import { appStore } from '../../store';
 
 const { width, height } = Dimensions.get('window');
 
@@ -45,6 +46,10 @@ function WalkThroughScreen() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [displayIndex, setDisplayIndex] = useState(0); // drives text only
   const flatListRef = useRef<FlatList>(null);
+
+  useLayoutEffect(() => {
+    appStore.hasSeenWalkthrough.set(true);
+  }, []);
 
   const scrollX = useRef(new Animated.Value(0)).current;
   const translateY = useRef(new Animated.Value(0)).current;

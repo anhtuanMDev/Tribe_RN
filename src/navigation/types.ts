@@ -2,7 +2,6 @@ import { ROUTES } from "./params";
 import { NavigatorScreenParams } from '@react-navigation/native';
 
 export type FlowCredential = {
-  [ROUTES.WALK_THROUGH]: undefined,
   [ROUTES.SIGN_UP]: { email: string },
   [ROUTES.SIGN_IN]: undefined,
   [ROUTES.FORGOT_PASSWORD]: undefined,
@@ -16,8 +15,8 @@ export type FlowBottom = {
 }
 
 export type PARAMS = {
+  [ROUTES.WALK_THROUGH]: undefined,
   [ROUTES.FLOW_CREDENTAIL]: NavigatorScreenParams<FlowCredential>,
-
   [ROUTES.FLOW_BOTTOM]: NavigatorScreenParams<FlowBottom>,
 };
 

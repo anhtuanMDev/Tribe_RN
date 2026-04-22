@@ -11,7 +11,6 @@ function CredentialFlow() {
   return (
     <CredentialProvider>
       <CredentialStack.Navigator screenOptions={screenOptions}>
-        <CredentialStack.Screen name={ROUTES.WALK_THROUGH} component={WalkThroughScreen} />
         <CredentialStack.Screen name={ROUTES.SIGN_IN} component={SignInScreen} />
         <CredentialStack.Screen name={ROUTES.SIGN_UP} component={SignUpScreen} />
         <CredentialStack.Screen
