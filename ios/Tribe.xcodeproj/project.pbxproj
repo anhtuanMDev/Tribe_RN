@@ -153,6 +153,8 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */,
 				E235C05ADACE081382539298 /* [CP] Copy Pods Resources */,
+				9A041BF9FF364C70BF05AD88 /* Upload Debug Symbols to Sentry */,
+				29FCA2A5EF27423695E38992 /* Copy nanoicons fonts */,
 			);
 			buildRules = (
 			);
@@ -232,7 +234,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nREACT_NATIVE_XCODE=\"$REACT_NATIVE_PATH/scripts/react-native-xcode.sh\"\n\n/bin/sh -c \"\\\"$WITH_ENVIRONMENT\\\" \\\"$REACT_NATIVE_XCODE\\\"\"\n";
+			shellScript = "set -e\n\nWITH_ENVIRONMENT=\"$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh\"\nSENTRY_XCODE=\"$REACT_NATIVE_PATH/../@sentry/react-native/scripts/sentry-xcode.sh\"\n\n/bin/sh -c \"\\\"$WITH_ENVIRONMENT\\\" \\\"$SENTRY_XCODE\\\"\"\n";
 		};
 		00EEFC60759A1932668264C0 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -289,6 +291,39 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Tribe/Pods-Tribe-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		9A041BF9FF364C70BF05AD88 /* Upload Debug Symbols to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Upload Debug Symbols to Sentry";
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			shellPath = /bin/sh;
+			shellScript = "/bin/sh ../node_modules/@sentry/react-native/scripts/sentry-xcode-debug-files.sh";
+		};
+		29FCA2A5EF27423695E38992 /* Copy nanoicons fonts */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Copy nanoicons fonts";
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			shellPath = /bin/sh;
+			shellScript = "
+        NANOICONS_DIR=\"\${PROJECT_DIR}/nanoicons-fonts\"
+        if [ -d \"$NANOICONS_DIR\" ]; then
+          cp \"$NANOICONS_DIR\"/*.ttf \"\${BUILT_PRODUCTS_DIR}/\${UNLOCALIZED_RESOURCES_FOLDER_PATH}/\" 2>/dev/null || true
+        fi
+      ";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -2,10 +2,8 @@ import React from 'react'
 import { StyleSheet } from 'react-native'
 import { View } from 'react-native'
 import { pallet } from '../../config/pallet'
-import Typography from '../../components/Typography'
-import Button from '../../components/Button'
+import { Typography, Button, TextInput } from '../../components'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import TextInput from '../../components/TextInput'
 
 const PostScreen = () => {
     return (

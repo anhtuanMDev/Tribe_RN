@@ -1,0 +1,9 @@
+{
+    "iconSets": [
+        {
+            "inputDir": "src/assets/svg",
+            "fontFamily": "AppIcons",
+            "outputDir": "src/components/Icon"
+        }
+    ]
+}

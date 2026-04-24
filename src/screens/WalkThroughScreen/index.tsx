@@ -10,9 +10,7 @@ import {
   View,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { PineTreeSVG } from '../../assets/svg';
-import Button from '../../components/Button';
-import Typography from '../../components/Typography';
+import { Button, Icon, Typography } from '../../components';
 import { fonts } from '../../config/constants';
 import { pallet } from '../../config/pallet';
 import { ROUTES } from '../../navigation/params';
@@ -141,7 +139,7 @@ function WalkThroughScreen() {
       {/* Header */}
       <View style={styles.header}>
         <View style={styles.nameWrapper}>
-          <PineTreeSVG />
+          <Icon name="pine" size={24} color={pallet.primary} />
           <Typography style={styles.name} level="headlineSmall">
             Tribe
           </Typography>

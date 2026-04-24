@@ -1,11 +1,11 @@
 import React from 'react';
-import { CredentialStack, screenOptions } from '../../utils';
-import { CredentialProvider } from './context';
-import { ROUTES } from '../../params';
-import WalkThroughScreen from '../../../screens/WalkThroughScreen';
+import ForgotPasswordScreen from '../../../screens/ForgotPasswordScreen';
 import SignInScreen from '../../../screens/SignInScreen';
 import SignUpScreen from '../../../screens/SignUpScreen';
-import ForgotPasswordScreen from '../../../screens/ForgotPasswordScreen';
+import VerifyEmailScreen from '../../../screens/VerifyEmailScreen';
+import { ROUTES } from '../../params';
+import { CredentialStack, screenOptions } from '../../utils';
+import { CredentialProvider } from './context';
 
 function CredentialFlow() {
   return (
@@ -16,6 +16,10 @@ function CredentialFlow() {
         <CredentialStack.Screen
           name={ROUTES.FORGOT_PASSWORD}
           component={ForgotPasswordScreen}
+        />
+        <CredentialStack.Screen
+          name={ROUTES.VERIFY_EMAIL}
+          component={VerifyEmailScreen}
         />
       </CredentialStack.Navigator>
     </CredentialProvider>

@@ -1,30 +1,33 @@
 import React from 'react';
 import {
-  View,
-  StyleSheet,
+  BlurEvent,
+  FocusEvent,
   TextInput as NativeTextInput,
+  StyleSheet,
   TextInputProps,
   TextProps,
-  FocusEvent,
-  BlurEvent,
+  View,
 } from 'react-native';
 import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
   interpolateColor,
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
 } from 'react-native-reanimated';
-import { pallet } from '../../config/pallet';
 import { fonts } from '../../config/constants';
+import { pallet } from '../../config/pallet';
+import { Typography } from '../Typography';
 
 export type CustomTextInputProps = {
   lead?: React.ReactNode;
   action?: React.ReactNode;
   textStyle?: TextProps['style'];
+  error?: string;
 } & TextInputProps;
 
 function TextInput({
   lead,
+  error,
   action,
   textStyle,
   style: containerStyle,
@@ -50,26 +53,25 @@ function TextInput({
       [0, 1],
       [pallet.variant.neutral['300'], pallet.primary],
     ),
-    borderWidth: withTiming(focusProgress.value === 1 ? 2 : 1, { duration: 200 }),
+    borderWidth: withTiming(focusProgress.value === 1 ? 2 : 1, {
+      duration: 200,
+    }),
   }));
 
   return (
-    <Animated.View
-      style={[
-        styles.container,
-        animatedContainerStyle,
-        containerStyle,
-      ]}
-    >
-      {lead}
-      <NativeTextInput
-        onBlur={onBlur}
-        onFocus={onFocus}
-        style={[styles.input, textStyle]}
-        {...rest}
-      />
-      {action}
-    </Animated.View>
+    <View style={containerStyle}>
+      <Animated.View style={[styles.container, animatedContainerStyle]}>
+        {lead}
+        <NativeTextInput
+          onBlur={onBlur}
+          onFocus={onFocus}
+          style={[styles.input, textStyle]}
+          {...rest}
+        />
+        {action}
+      </Animated.View>
+      {error && <Typography level="linkSmall" style={styles.error}>{error}</Typography>}
+    </View>
   );
 }
 
@@ -97,6 +99,13 @@ const styles = StyleSheet.create({
     paddingRight: 0,
     paddingBottom: 0,
   },
+
+  error: {
+    color: pallet.error,
+    fontFamily: fonts.nunito.regular,
+    marginTop: 4,
+    marginLeft: 4,
+  },
 });
 
-export default TextInput;
+export { TextInput };

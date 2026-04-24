@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import { pallet } from '../../config/pallet';
 import buttonStyle from './styles';
-import Typography from '../Typography';
+import { Typography } from '../Typography';
 
 export type ButtonProps = {
   title?: string;
@@ -34,7 +34,6 @@ function Button({
   style: customStyle,
   ...rest
 }: ButtonProps) {
-
   console.log('Skip', title);
 
   return (
@@ -47,14 +46,15 @@ function Button({
         fullWidth && styles.fullWidth,
         customStyle,
         disabled ? (disableStyle ? disableStyle : styles.disable) : undefined,
-      ]}>
-
+      ]}
+    >
       {leftIcon}
-      {title && <Typography level="button" style={[styles.buttonText, textStyle]}>
-        {title}
-      </Typography>}
+      {title && (
+        <Typography level="button" style={[styles.buttonText, textStyle]}>
+          {title}
+        </Typography>
+      )}
       {rightIcon}
-
     </Pressable>
   );
 }
@@ -87,4 +87,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Button;
+export { Button };

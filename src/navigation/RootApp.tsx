@@ -7,19 +7,27 @@ import { navigationRef } from './utils';
 import { useLogger } from '@react-navigation/devtools';
 import { StatusBar } from 'react-native';
 import { pallet } from '../config/pallet';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
+const queryClient = new QueryClient();
 function RootApp() {
   useLogger(navigationRef);
 
   return (
-    <SafeAreaProvider>
-      <GestureHandlerRootView>
-        <StatusBar translucent={true} barStyle={'dark-content'} backgroundColor={'transparent'} />
-        <NavigationContainer ref={navigationRef}>
-          <RootStack />
-        </NavigationContainer>
-      </GestureHandlerRootView>
-    </SafeAreaProvider>
+    <QueryClientProvider client={queryClient}>
+      <SafeAreaProvider>
+        <GestureHandlerRootView>
+          <StatusBar
+            translucent={true}
+            barStyle={'dark-content'}
+            backgroundColor={'transparent'}
+          />
+          <NavigationContainer ref={navigationRef}>
+            <RootStack />
+          </NavigationContainer>
+        </GestureHandlerRootView>
+      </SafeAreaProvider>
+    </QueryClientProvider>
   );
 }
 
