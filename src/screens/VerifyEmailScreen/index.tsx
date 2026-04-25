@@ -6,8 +6,17 @@ import { fonts } from '../../config/constants';
 import { pallet } from '../../config/pallet';
 import { convertAlpha } from '../../utils';
 import ResendCode from './components/ResendCode';
+import { useVerifyEmail } from './hooks/useVerifyEmail';
+import { useCredential } from '../../navigation/flows/flowCredential/context';
 
 const VerifyEmailScreen = () => {
+    const { mutate: verifyEmail } = useVerifyEmail();
+    const { state } = useCredential();
+
+    const handleVerifyEmail = (code: string) => {
+        verifyEmail({ email: state.email ?? '', code });
+    };
+
     return (
         <SafeAreaView style={styles.container}>
             <KeyboardAvoidingView>
@@ -39,7 +48,7 @@ const VerifyEmailScreen = () => {
                     email. Enter it below to continue.
                 </Typography>
 
-                <InputCode length={6} />
+                <InputCode onFinsh={handleVerifyEmail} length={6} />
 
                 <Typography style={styles.contextText} level='labelMedium'>Didn't receive a code?</Typography>
 

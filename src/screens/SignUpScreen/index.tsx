@@ -12,20 +12,22 @@ import { appStore } from '../../store';
 import { useRegister } from './hooks/useRegister';
 import { signUpSchema } from './schema';
 import { SignUpFormData } from './type';
+import { useCredential } from '../../navigation/flows/flowCredential/context';
 
 function SignUpScreen() {
   const userEmail = appStore.user.get()?.email;
+  const { state, setEmail } = useCredential();
 
-  const { control, handleSubmit, formState: { errors } } = useForm<SignUpFormData>({
+  const { control, handleSubmit } = useForm<SignUpFormData>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
-      email: userEmail ?? '',
+      email: userEmail ?? state.email ?? '',
       password: '',
       username: '',
     }
   })
 
-  const { mutate: login, isPending, isError } = useRegister();
+  const { mutate: register, isPending } = useRegister();
 
   const signin = () => {
     replace(ROUTES.FLOW_CREDENTAIL, {
@@ -35,7 +37,14 @@ function SignUpScreen() {
 
   const onSubmit = (data: SignUpFormData) => {
     Keyboard.dismiss();
-    login(data);
+    register(data, {
+      onSuccess: () => {
+        setEmail(data.email);
+        replace(ROUTES.FLOW_CREDENTAIL, {
+          screen: ROUTES.VERIFY_EMAIL,
+        })
+      },
+    });
   };
 
   return (
