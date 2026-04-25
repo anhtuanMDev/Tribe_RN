@@ -1,5 +1,7 @@
+import { UAT_URL, PRODUCT_URL } from '@env';
+
 export const API_PATH = {
-  BASE_URL: 'https://tribe-backend-n0o0.onrender.com',
+  BASE_URL: __DEV__ ? UAT_URL : PRODUCT_URL,
 
   AUTH: {
     REGISTER: '/auth/register/',
