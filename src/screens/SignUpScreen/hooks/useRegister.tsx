@@ -1,13 +1,21 @@
 import { useMutation } from '@tanstack/react-query';
 import { API_PATH } from '../../../config/apiPath';
 import api from '../../../utils/axios';
+import { useCredential } from '../../../navigation/flows/flowCredential/context';
+import { replace } from '../../../navigation/utils';
+import { ROUTES } from '../../../navigation/params';
 
 export const useRegister = () => {
+    const { setEmail } = useCredential();
+
     return useMutation({
         mutationFn: (data: { email: string; username: string; password: string }) =>
             api.post(API_PATH.AUTH.REGISTER, data),
-        onSuccess: (response: any) => {
-            console.log(response);
+        onSuccess: (_response: any, variables: { email: string; username: string; password: string }) => {
+            setEmail(variables.email);
+            replace(ROUTES.FLOW_CREDENTAIL, {
+                screen: ROUTES.VERIFY_EMAIL,
+            })
         },
         onError: (error: any) => {
             console.log(error?.response?.data?.error);

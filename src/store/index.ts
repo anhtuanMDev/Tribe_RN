@@ -1,14 +1,6 @@
-// src/store/index.ts
-import { observable } from '@legendapp/state';
-import { syncObservable } from '@legendapp/state/sync';
 import { ObservablePersistMMKV } from '@legendapp/state/persist-plugins/mmkv';
-
-export const appStore = observable({
-  hasSeenWalkthrough: false,
-  token: null as string | null,
-  refreshToken: null as string | null,
-  user: null as { id: string; email: string; username: string } | null,
-});
+import { syncObservable } from '@legendapp/state/sync';
+import { appStore } from './appState';
 
 syncObservable(appStore, {
   persist: {
@@ -16,3 +8,6 @@ syncObservable(appStore, {
     plugin: ObservablePersistMMKV,
   },
 });
+
+export * from './appState';
+export * from './toastState';

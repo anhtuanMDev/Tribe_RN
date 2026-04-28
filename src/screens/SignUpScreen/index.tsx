@@ -37,14 +37,7 @@ function SignUpScreen() {
 
   const onSubmit = (data: SignUpFormData) => {
     Keyboard.dismiss();
-    register(data, {
-      onSuccess: () => {
-        setEmail(data.email);
-        replace(ROUTES.FLOW_CREDENTAIL, {
-          screen: ROUTES.VERIFY_EMAIL,
-        })
-      },
-    });
+    register(data);
   };
 
   return (

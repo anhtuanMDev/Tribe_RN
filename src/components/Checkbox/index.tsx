@@ -2,7 +2,6 @@ import React from 'react';
 import { Pressable, StyleSheet, View } from 'react-native';
 import { pallet } from '../../config/pallet';
 import { convertAlpha } from '../../utils/assets';
-import Typography from '../Typography';
 import { CheckboxContext, useCheckbox } from './context';
 import { BOX_SIZE } from './mock';
 import {
@@ -10,6 +9,7 @@ import {
   CheckboxItemProps,
   CheckboxLabelProps,
 } from './type';
+import { Typography } from '../Typography';
 
 // ─── Useage
 // const [checked, setChecked] = useState<SelectItemType[]>([]);
