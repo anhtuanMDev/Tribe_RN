@@ -2,7 +2,7 @@ import React from 'react'
 import { View, StyleSheet, Pressable } from 'react-native'
 import { pallet } from '../../config/pallet'
 import { SafeAreaView } from 'react-native-safe-area-context'
-import { Icon, InputCode, InputCodeCell, KeyboardAvoidingView, TextInput, Typography } from '../../components'
+import { Icon, InputCode, KeyboardAwareView, TextInput, Typography } from '../../components'
 import { fonts } from '../../config/constants'
 import { Controller, useForm } from 'react-hook-form'
 import { ForgotPasswordFormData } from './type'
@@ -32,7 +32,7 @@ function ForgotPasswordScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView>
+      <KeyboardAwareView>
         <Pressable onPress={signin} style={styles.navigationBlock}>
           <Icon name='arrow' size={24} color={pallet.primary} />
           <Typography style={styles.navigationText} level="bodyLarge">
@@ -102,7 +102,7 @@ function ForgotPasswordScreen() {
             </View>
           </View>
         </View>
-      </KeyboardAvoidingView>
+      </KeyboardAwareView>
     </SafeAreaView>
   )
 }

@@ -8,4 +8,4 @@ export * from './Dropdown';
 export * from './TextInput';
 export * from './InputCode';
 export * from './Typography';
-export * from './KeyboardAvoidingView';
+export * from './KeyboardAwareView';

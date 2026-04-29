@@ -1,17 +1,18 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, Icon, InputCode, KeyboardAvoidingView, Typography } from '../../components';
+import { Button, Icon, InputCode, KeyboardAwareView, Typography } from '../../components';
 import { fonts } from '../../config/constants';
 import { pallet } from '../../config/pallet';
+import { useCredential } from '../../navigation/flows/flowCredential/context';
 import { convertAlpha } from '../../utils';
 import ResendCode from './components/ResendCode';
 import { useVerifyEmail } from './hooks/useVerifyEmail';
-import { useCredential } from '../../navigation/flows/flowCredential/context';
 
 const VerifyEmailScreen = () => {
     const { mutate: verifyEmail } = useVerifyEmail();
     const { state } = useCredential();
+    console.log('state on mount:', state);
 
     const handleVerifyEmail = (code: string) => {
         verifyEmail({ email: state.email ?? '', code });
@@ -19,7 +20,7 @@ const VerifyEmailScreen = () => {
 
     return (
         <SafeAreaView style={styles.container}>
-            <KeyboardAvoidingView>
+            <KeyboardAwareView>
                 <Button
                     level='ghost'
                     focusable={false}
@@ -53,7 +54,7 @@ const VerifyEmailScreen = () => {
                 <Typography style={styles.contextText} level='labelMedium'>Didn't receive a code?</Typography>
 
                 <ResendCode />
-            </KeyboardAvoidingView>
+            </KeyboardAwareView>
         </SafeAreaView>
     )
 }

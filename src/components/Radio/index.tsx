@@ -10,11 +10,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import { pallet } from '../../config/pallet';
 import { convertAlpha } from '../../utils/assets';
-import Typography from '../Typography';
 import { RadioContext, useRadio } from './context';
 import { RADIO_SIZE } from './mock';
 import { RadioGroupProps, RadioItemProps, RadioLabelProps } from './type';
 import { scheduleOnUI } from 'react-native-worklets';
+import { Typography } from '../Typography';
 
 // ─── Radio.Group ─────────────────────────────────────────────────────────────
 

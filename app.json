@@ -1,4 +1,7 @@
 {
   "name": "Tribe",
-  "displayName": "Tribe"
+  "displayName": "Tribe",
+  "android": {
+    "softwareKeyboardLayoutMode": "pan"
+  }
 }

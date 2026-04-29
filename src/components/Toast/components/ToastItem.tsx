@@ -32,15 +32,16 @@ import { ToastItem } from '../type';
 import { dismissToast, pendingDismiss } from '../../../store';
 import { useToastAnimation } from '../hooks';
 import { useSelector } from '@legendapp/state/react';
+import { pallet } from '../../../config/pallet';
 
 // ─── Variant config ───────────────────────────────────────────────────────────
 
 const VARIANT = {
-    success: { accent: '#4ADE80', bg: '#052e16', glyph: '✓' },
-    error: { accent: '#F87171', bg: '#2d0a0a', glyph: '✕' },
-    warning: { accent: '#FBBF24', bg: '#2d1a00', glyph: '!' },
-    info: { accent: '#60A5FA', bg: '#0a1a2d', glyph: 'i' },
-    custom: { accent: '#A78BFA', bg: '#150d2d', glyph: '★' },
+    success: { accent: pallet.primary, bg: pallet.variant.neutral['0'], glyph: '✓' },
+    error: { accent: pallet.error, bg: pallet.variant.neutral['0'], glyph: '✕' },
+    warning: { accent: pallet.tertiary, bg: pallet.variant.neutral['0'], glyph: '!' },
+    info: { accent: pallet.secondary, bg: pallet.variant.neutral['0'], glyph: 'i' },
+    custom: { accent: pallet.primary, bg: pallet.variant.neutral['0'], glyph: '★' },
 } as const;
 
 // ─── Props ────────────────────────────────────────────────────────────────────

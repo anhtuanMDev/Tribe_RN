@@ -6,24 +6,24 @@ const normalizeError = (error: any) => {
     const status = error.response.status;
     const serverMessage = error.response.data?.error;
 
-    if (status === 400) {
-        return { code: 'BAD_REQUEST', message: serverMessage ?? 'Invalid request' };
-    }
-    if (status === 401) {
-        return { code: 'UNAUTHORIZED', message: serverMessage ?? 'Session expired' };
-    }
-    if (status === 403) {
-        return { code: 'FORBIDDEN', message: 'You don\'t have access to this' };
-    }
-    if (status === 404) {
-        return { code: 'NOT_FOUND', message: 'Resource not found' };
-    }
-    if (status === 429) {
-        return { code: 'RATE_LIMITED', message: 'Too many requests, please wait' };
-    }
     if (status >= 500) {
         return { code: 'SERVER_ERROR', message: 'Something went wrong' };
     }
 
-    return { code: 'UNKNOWN', message: 'Something went wrong' };
+    switch (status) {
+        case 400:
+            return { code: 'BAD_REQUEST', message: serverMessage ?? 'Invalid request' };
+        case 401:
+            return { code: 'UNAUTHORIZED', message: serverMessage ?? 'Session expired' };
+        case 403:
+            return { code: 'FORBIDDEN', message: 'You don\'t have access to this' };
+        case 404:
+            return { code: 'NOT_FOUND', message: 'Resource not found' };
+        case 429:
+            return { code: 'RATE_LIMITED', message: 'Too many requests, please wait' };
+        default:
+            return { code: 'UNKNOWN', message: 'Something went wrong' };
+    }
 };
+
+export { normalizeError };

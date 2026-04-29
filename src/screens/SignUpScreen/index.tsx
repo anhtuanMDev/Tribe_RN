@@ -3,20 +3,20 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { Keyboard, StyleSheet, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Button, Icon, KeyboardAvoidingView, TextInput, Typography } from '../../components';
+import { Button, Icon, KeyboardAwareView, TextInput, Typography } from '../../components';
 import { fonts } from '../../config/constants';
 import { pallet } from '../../config/pallet';
+import { useCredential } from '../../navigation/flows/flowCredential/context';
 import { ROUTES } from '../../navigation/params';
 import { replace } from '../../navigation/utils';
 import { appStore } from '../../store';
 import { useRegister } from './hooks/useRegister';
 import { signUpSchema } from './schema';
 import { SignUpFormData } from './type';
-import { useCredential } from '../../navigation/flows/flowCredential/context';
 
 function SignUpScreen() {
   const userEmail = appStore.user.get()?.email;
-  const { state, setEmail } = useCredential();
+  const { state } = useCredential();
 
   const { control, handleSubmit } = useForm<SignUpFormData>({
     resolver: zodResolver(signUpSchema),
@@ -42,7 +42,7 @@ function SignUpScreen() {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView>
+      <KeyboardAwareView>
         <View style={styles.imageplaceholder}>
           <Icon name='leaf' size={32} color={pallet.primary} />
         </View>
@@ -136,7 +136,7 @@ function SignUpScreen() {
             Sign In
           </Typography>
         </View>
-      </KeyboardAvoidingView>
+      </KeyboardAwareView>
     </SafeAreaView>
   );
 }

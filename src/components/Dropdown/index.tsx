@@ -9,11 +9,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import { pallet } from '../../config/pallet';
 import { SelectItemType } from '../../config/type';
-import Typography from '../Typography';
 import { convertAlpha } from '../../utils/assets';
 import { fonts } from '../../config/constants';
 import { DropdownProps } from './type';
 import { ANIM_DURATION, ITEM_HEIGHT } from './mock';
+import { Typography } from '../Typography';
 
 const RePress = Animated.createAnimatedComponent(Pressable);
 

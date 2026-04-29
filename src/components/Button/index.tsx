@@ -22,7 +22,7 @@ export type ButtonProps = {
   rightIcon?: React.ReactNode;
 } & Omit<PressableProps, 'style'>;
 
-function Button({
+const Button = React.memo(function ({
   title,
   disabled,
   leftIcon,
@@ -57,7 +57,7 @@ function Button({
       {rightIcon}
     </Pressable>
   );
-}
+})
 
 const styles = StyleSheet.create({
   fullWidth: {

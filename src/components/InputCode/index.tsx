@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, StyleSheet, TextInput, TextInputProps, View } from 'react-native';
 import { Typography } from '../Typography';
 import { fonts } from '../../config/constants';
@@ -24,59 +24,45 @@ const InputCodeCell = ({ value, active }: InputCodeCellProps) => {
     )
 }
 
-const InputCode = ({ style, length, ...props }: InputCodeProps) => {
+const InputCode = ({ style, length, onFinsh, onChangeText, onFocus, onBlur, ...props }: InputCodeProps) => {
     const textRef = useRef<TextInput>(null);
-    const [isFocused, setIsFocused] = React.useState(false);
-    const arrs = useMemo(() => { return Array(length).fill(0).map((_, i) => i) }, [length])
+    const [isFocused, setIsFocused] = useState(false);
+    const [text, setText] = useState('');
+    const arrs = useMemo(() => Array(length).fill(0).map((_, i) => i), [length]);
 
-    useEffect(() => {
-        if (props.value && length && props.value.length === length) {
-            props.onFinsh?.(props.value);
+    const handleChangeText = (val: string) => {
+        setText(val);
+        onChangeText?.(val);
+        if (length && val.length === length) {
+            onFinsh?.(val);
         }
-    }, [props.value, length]);
-
-    const forceFocusTextInput = () => {
-        textRef.current?.focus();
-    }
+    };
 
     const activeIndex = useMemo(() => {
         if (!isFocused) return -1;
-
-        const valLength = props.value?.length ?? 0;
-
-        if (valLength === 0) return 0;
-
-        if (valLength >= (length ?? 0)) return length! - 1;
-
-        return valLength;
-    }, [isFocused, props.value, length]);
+        if (text.length === 0) return 0;
+        if (text.length >= (length ?? 0)) return (length ?? 0) - 1;
+        return text.length;
+    }, [isFocused, text, length]);
 
     return (
-        <Pressable onPress={forceFocusTextInput} style={[styles.inputCodeContainer, style]}>
+        <Pressable onPress={() => textRef.current?.focus()} style={[styles.inputCodeContainer, style]}>
             <TextInput
-                maxLength={length}
                 ref={textRef}
                 {...props}
                 style={styles.hidden}
-                onFocus={(e) => {
-                    setIsFocused(true);
-                    props.onFocus?.(e);
-                }}
-                onBlur={(e) => {
-                    setIsFocused(false);
-                    props.onBlur?.(e);
-                }}
+                value={text}
+                maxLength={length}
+                onChangeText={handleChangeText}
+                onFocus={(e) => { setIsFocused(true); onFocus?.(e); }}
+                onBlur={(e) => { setIsFocused(false); onBlur?.(e); }}
             />
             {arrs.map((i) => (
-                <InputCodeCell
-                    key={i}
-                    value={props.value?.[i]}
-                    active={i === activeIndex}
-                />
+                <InputCodeCell key={i} value={text[i]} active={i === activeIndex} />
             ))}
         </Pressable>
-    )
-}
+    );
+};
 
 const styles = StyleSheet.create({
     cellContainer: {
