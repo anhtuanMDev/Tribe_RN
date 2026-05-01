@@ -15,4 +15,14 @@ export const API_PATH = {
     DELETE_ACCOUNT: '/auth/delete-account/',
     REFRESH: '/auth/api/token/refresh/',
   },
+
+  POSTS: {
+    LIST: '/posts/',                                                      // GET feed, POST create
+    DETAIL: (id: number) => `/posts/${id}/`,                             // GET, PATCH, DELETE
+    JOIN: (id: number) => `/posts/${id}/join/`,                          // POST
+    CANCEL: (id: number) => `/posts/${id}/cancel/`,                      // POST
+    REQUESTS: (id: number) => `/posts/${id}/requests/`,                  // GET pending (host)
+    APPROVE: (id: number, userId: number) => `/posts/${id}/approve/${userId}/`,  // POST
+    REJECT: (id: number, userId: number) => `/posts/${id}/reject/${userId}/`,    // POST
+  },
 };
