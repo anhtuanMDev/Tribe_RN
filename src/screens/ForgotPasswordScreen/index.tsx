@@ -10,6 +10,7 @@ import { forgotPasswordSchema } from './schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { navigate, replace } from '../../navigation/utils'
 import { ROUTES } from '../../navigation/params'
+import { useRequestCode } from './hooks/useRequestCode'
 
 function ForgotPasswordScreen() {
   const { control, handleSubmit, formState: { errors } } = useForm<ForgotPasswordFormData>({
@@ -20,8 +21,14 @@ function ForgotPasswordScreen() {
     }
   })
 
+  const { mutate: requestCode } = useRequestCode();
+
   const onSubmit = (data: ForgotPasswordFormData) => {
     console.log(data);
+  }
+
+  const onPressSendCode = (data: ForgotPasswordFormData) => {
+    requestCode({ email: data.email });
   }
 
   const signin = () => {
@@ -67,7 +74,7 @@ function ForgotPasswordScreen() {
               )}
             />
 
-            <Typography level="labelLarge" style={styles.sendText}>
+            <Typography level="labelLarge" onPress={handleSubmit(onPressSendCode)} style={styles.sendText}>
               Send Verification Code
             </Typography>
           </View>
@@ -80,7 +87,7 @@ function ForgotPasswordScreen() {
             <Controller
               control={control}
               name="code"
-              render={({ field: { onChange, value }, fieldState: { error } }) => (
+              render={({ field: { onChange, value } }) => (
                 <InputCode
                   length={6}
                   value={value}

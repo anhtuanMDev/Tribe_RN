@@ -17,6 +17,13 @@ export const fonts = {
   },
 } as const;
 
+export const VerificationPurpose = {
+  REGISTER: "register",
+  RESET_PASSWORD: "reset_password",
+  DELETE_ACCOUNT: "delete_account",
+  CHANGE_PASSWORD: "change_password",
+} as const;
+
 export type Alpha =
   | 0
   | 5

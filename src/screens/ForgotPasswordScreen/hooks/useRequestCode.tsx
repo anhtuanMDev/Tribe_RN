@@ -4,7 +4,7 @@ import api from '../../../utils/axios';
 
 export const useRequestCode = () => {
     return useMutation({
-        mutationFn: (data: { email: string }) => api.post(API_PATH.AUTH.FORGOT_PASSWORD, data),
+        mutationFn: (data: { email: string }) => api.post(API_PATH.AUTH.REQUEST_VERIFICATION, data),
         onSuccess: (response: any) => {
             console.log(response);
         },

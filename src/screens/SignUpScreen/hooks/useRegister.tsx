@@ -4,6 +4,7 @@ import api from '../../../utils/axios';
 import { useCredential } from '../../../navigation/flows/flowCredential/context';
 import { navigate, replace } from '../../../navigation/utils';
 import { ROUTES } from '../../../navigation/params';
+import { VerificationPurpose } from '../../../config/constants';
 
 export const useRegister = () => {
     const { setEmail } = useCredential();
@@ -15,6 +16,7 @@ export const useRegister = () => {
             setEmail(variables.email);
             navigate(ROUTES.FLOW_CREDENTAIL, {
                 screen: ROUTES.VERIFY_EMAIL,
+                params: { purpose: VerificationPurpose.REGISTER }
             })
         },
         onError: (error: any) => {

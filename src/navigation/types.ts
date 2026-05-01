@@ -1,3 +1,4 @@
+import { VerificationPurposeType } from '../config/type';
 import { ROUTES } from './params';
 import { NavigatorScreenParams } from '@react-navigation/native';
 
@@ -5,7 +6,7 @@ export type FlowCredential = {
   [ROUTES.SIGN_UP]: undefined;
   [ROUTES.SIGN_IN]: undefined;
   [ROUTES.FORGOT_PASSWORD]: undefined;
-  [ROUTES.VERIFY_EMAIL]: undefined;
+  [ROUTES.VERIFY_EMAIL]: { purpose: VerificationPurposeType };
 };
 
 export type FlowBottom = {
