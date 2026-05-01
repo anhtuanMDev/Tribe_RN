@@ -5,6 +5,7 @@ export const ROUTES = {
   SIGN_IN: 'SignIn',
   FORGOT_PASSWORD: 'ForgotPassword',
   VERIFY_EMAIL: 'VerifyEmail',
+  RESET_PASSWORD: 'ResetPassword',
 
   FLOW_BOTTOM: 'BOTTOMTAB',
   HOME: 'Home',

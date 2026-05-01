@@ -7,6 +7,7 @@ export type FlowCredential = {
   [ROUTES.SIGN_IN]: undefined;
   [ROUTES.FORGOT_PASSWORD]: undefined;
   [ROUTES.VERIFY_EMAIL]: { purpose: VerificationPurposeType };
+  [ROUTES.RESET_PASSWORD]: { purpose: VerificationPurposeType };
 };
 
 export type FlowBottom = {

@@ -94,7 +94,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: pallet.background,
     paddingHorizontal: 24,
-    paddingTop: 37,
   },
 
   backButton: { backgroundColor: pallet.variant.neutral['50'] },

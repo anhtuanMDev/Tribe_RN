@@ -6,13 +6,20 @@ import VerifyEmailScreen from '../../../screens/VerifyEmailScreen';
 import { ROUTES } from '../../params';
 import { CredentialStack, screenOptions } from '../../utils';
 import { CredentialProvider } from './context';
+import ResetPasswordScreen from '../../../screens/ResetPasswordScreen';
 
 function CredentialFlow() {
   return (
     <CredentialProvider>
       <CredentialStack.Navigator screenOptions={screenOptions}>
-        <CredentialStack.Screen name={ROUTES.SIGN_IN} component={SignInScreen} />
-        <CredentialStack.Screen name={ROUTES.SIGN_UP} component={SignUpScreen} />
+        <CredentialStack.Screen
+          name={ROUTES.SIGN_IN}
+          component={SignInScreen}
+        />
+        <CredentialStack.Screen
+          name={ROUTES.SIGN_UP}
+          component={SignUpScreen}
+        />
         <CredentialStack.Screen
           name={ROUTES.FORGOT_PASSWORD}
           component={ForgotPasswordScreen}
@@ -21,9 +28,13 @@ function CredentialFlow() {
           name={ROUTES.VERIFY_EMAIL}
           component={VerifyEmailScreen}
         />
+        <CredentialStack.Screen
+          name={ROUTES.RESET_PASSWORD}
+          component={ResetPasswordScreen}
+        />
       </CredentialStack.Navigator>
     </CredentialProvider>
   );
 }
 
-export default CredentialFlow
+export default CredentialFlow;
