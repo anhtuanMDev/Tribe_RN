@@ -1,7 +1,7 @@
 import * as Sentry from '@sentry/react-native';
 import { useMutation } from '@tanstack/react-query';
 import { API_PATH } from '../../../config/apiPath';
-import { toast } from '../../../store';
+import { appStore, toast } from '../../../store';
 import api from '../../../utils/axios';
 import { navigate } from '../../../navigation/utils';
 import { ROUTES } from '../../../navigation/params';
@@ -13,9 +13,11 @@ export const useLogin = () => {
     mutationFn: (data: { email: string; password: string }) =>
       api.post(API_PATH.AUTH.LOGIN, data),
     onSuccess: (response: any, variables) => {
+      appStore.token.set(response.data.token);
+      appStore.refreshToken.set(response.data.refresh);
       setEmail(variables.email);
       navigate(ROUTES.FLOW_BOTTOM, {
-        screen: ROUTES.HOME
+        screen: ROUTES.HOME,
       });
     },
     onError: (error: any, variables) => {
@@ -27,7 +29,11 @@ export const useLogin = () => {
 
 const handleLoginError = (error: any) => {
   if (!error.response) {
-    toast.show({ variant: 'error', title: 'No internet connection', position: 'bottom' })
+    toast.show({
+      variant: 'error',
+      title: 'No internet connection',
+      position: 'bottom',
+    });
     return;
   }
 
@@ -36,22 +42,42 @@ const handleLoginError = (error: any) => {
 
   if (status >= 500) {
     Sentry.captureException(error);
-    toast.show({ variant: 'error', title: 'Something went wrong', position: 'bottom' })
+    toast.show({
+      variant: 'error',
+      title: 'Something went wrong',
+      position: 'bottom',
+    });
     return;
   }
 
   switch (status) {
     case 400:
-      toast.show({ variant: 'error', title: serverMessage ?? 'Invalid request', position: 'bottom' })
+      toast.show({
+        variant: 'error',
+        title: serverMessage ?? 'Invalid request',
+        position: 'bottom',
+      });
       return;
     case 401:
-      toast.show({ variant: 'error', title: serverMessage ?? 'Session expired', position: 'bottom' })
+      toast.show({
+        variant: 'error',
+        title: serverMessage ?? 'Session expired',
+        position: 'bottom',
+      });
       return;
     case 403:
-      toast.show({ variant: 'error', title: serverMessage ?? 'You don\'t have access to this', position: 'bottom' })
+      toast.show({
+        variant: 'error',
+        title: serverMessage ?? "You don't have access to this",
+        position: 'bottom',
+      });
       return;
     case 404:
-      toast.show({ variant: 'error', title: serverMessage ?? 'Resource not found', position: 'bottom' })
+      toast.show({
+        variant: 'error',
+        title: serverMessage ?? 'Resource not found',
+        position: 'bottom',
+      });
       return;
     case 409:
       toast.show({
@@ -59,21 +85,30 @@ const handleLoginError = (error: any) => {
         position: 'bottom',
         title: serverMessage ?? 'User already exists',
         action: {
-          label: 'VerifyEmail', onPress: () => {
+          label: 'VerifyEmail',
+          onPress: () => {
             navigate(ROUTES.FLOW_CREDENTAIL, {
               screen: ROUTES.SIGN_UP,
-            })
-          }
-        }
-      })
+            });
+          },
+        },
+      });
       return;
     case 429:
-      toast.show({ variant: 'error', title: serverMessage ?? 'Too many requests, please wait', position: 'bottom' })
+      toast.show({
+        variant: 'error',
+        title: serverMessage ?? 'Too many requests, please wait',
+        position: 'bottom',
+      });
       return;
     default:
       Sentry.captureException(error);
       console.log(error);
-      toast.show({ variant: 'error', title: 'Something went wrong', position: 'bottom' })
+      toast.show({
+        variant: 'error',
+        title: 'Something went wrong',
+        position: 'bottom',
+      });
       return;
   }
 };

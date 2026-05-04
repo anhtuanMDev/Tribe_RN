@@ -25,4 +25,7 @@ export const API_PATH = {
     APPROVE: (id: number, userId: number) => `/posts/${id}/approve/${userId}/`,  // POST
     REJECT: (id: number, userId: number) => `/posts/${id}/reject/${userId}/`,    // POST
   },
+  ACTIVITIES: {
+    LIST: '/activities/',    // GET
+  },
 };
