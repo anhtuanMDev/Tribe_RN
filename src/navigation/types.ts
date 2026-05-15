@@ -13,13 +13,13 @@ export type FlowCredential = {
 export type FlowBottom = {
   [ROUTES.HOME]: undefined;
   [ROUTES.NOTIFICATION]: undefined;
-  [ROUTES.POST]: undefined;
 };
 
 export type PARAMS = {
   [ROUTES.WALK_THROUGH]: undefined;
   [ROUTES.FLOW_CREDENTAIL]: NavigatorScreenParams<FlowCredential>;
   [ROUTES.FLOW_BOTTOM]: NavigatorScreenParams<FlowBottom>;
+  [ROUTES.POST]: undefined;
 };
 
 export type NavigateArgs<T extends keyof PARAMS> = undefined extends PARAMS[T]

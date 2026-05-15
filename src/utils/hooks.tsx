@@ -1,10 +1,12 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { VerificationPurposeType } from '../config/type';
+import { ScreenDimensions, VerificationPurposeType } from '../config/type';
 import { API_PATH } from '../config/apiPath';
 import api from './axios';
 import { toast } from '../store';
 import * as Sentry from '@sentry/react-native';
+import { useWindowDimensions } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const useCountdown = (initialSeconds: number) => {
   const [timeLeft, setTimeLeft] = useState(initialSeconds);
@@ -195,4 +197,22 @@ const handleConfirmVerificationError = (error: any) => {
   }
 };
 
-export { useCountdown, useRequestVerifyEmailCode, useConfirmVerification };
+function useScreenDimensions(): ScreenDimensions {
+  const { width, height } = useWindowDimensions();
+  const insets = useSafeAreaInsets();
+
+  return {
+    width,
+    height,
+    safeWidth: width - insets.left - insets.right,
+    safeHeight: height - insets.top - insets.bottom,
+    isLandscape: width > height,
+  };
+}
+
+export {
+  useCountdown,
+  useRequestVerifyEmailCode,
+  useConfirmVerification,
+  useScreenDimensions,
+};

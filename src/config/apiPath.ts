@@ -26,6 +26,6 @@ export const API_PATH = {
     REJECT: (id: number, userId: number) => `/posts/${id}/reject/${userId}/`,    // POST
   },
   ACTIVITIES: {
-    LIST: '/activities/',    // GET
+    LIST: '/auth/activities/',    // GET
   },
 };

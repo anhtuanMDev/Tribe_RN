@@ -1,11 +1,10 @@
 import React from 'react';
 import { pallet } from '../../../config/pallet';
 import HomeScreen from '../../../screens/HomeScreen';
+import NotificationScreen from '../../../screens/NotificationScreen';
 import { convertAlpha } from '../../../utils/assets';
 import { ROUTES } from '../../params';
 import { BottomTab } from '../../utils';
-import NotificationScreen from '../../../screens/NotificationScreen';
-import PostScreen from '../../../screens/FlowPost/PostScreen';
 
 function BottomTabFlow() {
   return (
@@ -35,17 +34,6 @@ function BottomTabFlow() {
         component={NotificationScreen}
         options={{
           tabBarLabel: 'Noti',
-          tabBarIcon: () => ({
-            type: 'image',
-            source: require('../../../assets/images/bottomtab/leaf.png'),
-          }),
-        }}
-      />
-      <BottomTab.Screen
-        name={ROUTES.POST}
-        component={PostScreen}
-        options={{
-          tabBarLabel: 'Post',
           tabBarIcon: () => ({
             type: 'image',
             source: require('../../../assets/images/bottomtab/leaf.png'),

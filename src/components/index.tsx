@@ -1,3 +1,4 @@
+export * from './Chip';
 export * from './Icon';
 export * from './Radio';
 export * from './Toast';
@@ -6,6 +7,7 @@ export * from './Toggle';
 export * from './Checkbox';
 export * from './Dropdown';
 export * from './TextInput';
+export * from './TextArea';
 export * from './InputCode';
 export * from './Typography';
 export * from './ResendCode';

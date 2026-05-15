@@ -6,9 +6,9 @@ export const ROUTES = {
   FORGOT_PASSWORD: 'ForgotPassword',
   VERIFY_EMAIL: 'VerifyEmail',
   RESET_PASSWORD: 'ResetPassword',
+  POST: 'Post',
 
   FLOW_BOTTOM: 'BOTTOMTAB',
   HOME: 'Home',
   NOTIFICATION: 'Notification',
-  POST: 'Post',
 } as const;
