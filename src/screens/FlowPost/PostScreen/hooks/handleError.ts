@@ -1,5 +1,5 @@
 import * as Sentry from '@sentry/react-native';
-import { toast } from '../../../store';
+import { toast } from '../../../../store';
 
 export const handlePostError = (error: any) => {
   if (!error.response) {
