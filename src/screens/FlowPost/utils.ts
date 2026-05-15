@@ -1,7 +1,7 @@
+import { toast } from '../../store';
 import * as Sentry from '@sentry/react-native';
-import { toast } from '../../../../store';
 
-export const handlePostError = (error: any) => {
+const handlePostError = (error: any) => {
   if (!error.response) {
     toast.show({ variant: 'error', title: 'No internet connection', position: 'bottom' });
     return;
@@ -35,3 +35,5 @@ export const handlePostError = (error: any) => {
       return;
   }
 };
+
+export { handlePostError };

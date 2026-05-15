@@ -1,8 +1,8 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { API_PATH } from '../../../../config/apiPath';
-import { toast } from '../../../../store';
-import api from '../../../../utils/axios';
-import { handlePostError } from './handleError';
+import api from '../../../utils/axios';
+import { API_PATH } from '../../../config/apiPath';
+import { toast } from '../../../store';
+import { handlePostError } from '../utils';
 
 export const useRejectParticipant = (postId: number) => {
   const queryClient = useQueryClient();

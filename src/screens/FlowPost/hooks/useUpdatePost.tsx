@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { API_PATH } from '../../../../config/apiPath';
-import { toast } from '../../../../store';
-import api from '../../../../utils/axios';
+import api from '../../../utils/axios';
+import { API_PATH } from '../../../config/apiPath';
+import { toast } from '../../../store';
 import type { Post, UpdatePostPayload } from '../types';
-import { handlePostError } from './handleError';
+import { handlePostError } from '../utils';
 
 export const useUpdatePost = (id: number, onSuccess?: (post: Post) => void) => {
   const queryClient = useQueryClient();
