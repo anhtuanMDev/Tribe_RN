@@ -23,6 +23,7 @@ export type CustomTextInputProps = {
   action?: React.ReactNode;
   textStyle?: TextProps['style'];
   error?: string;
+  ref?: React.Ref<NativeTextInput>;
 } & TextInputProps;
 
 function TextInput({
@@ -33,6 +34,7 @@ function TextInput({
   style: containerStyle,
   onFocus: onInputFocused,
   onBlur: onInputBlur,
+  ref,
   ...rest
 }: CustomTextInputProps) {
   const focusProgress = useSharedValue(0);
@@ -63,6 +65,7 @@ function TextInput({
       <Animated.View style={[styles.container, animatedContainerStyle]}>
         {lead}
         <NativeTextInput
+          ref={ref}
           onBlur={onBlur}
           onFocus={onFocus}
           style={[styles.input, textStyle]}
@@ -70,7 +73,11 @@ function TextInput({
         />
         {action}
       </Animated.View>
-      {error && <Typography level="linkSmall" style={styles.error}>{error}</Typography>}
+      {error && (
+        <Typography level="linkSmall" style={styles.error}>
+          {error}
+        </Typography>
+      )}
     </View>
   );
 }

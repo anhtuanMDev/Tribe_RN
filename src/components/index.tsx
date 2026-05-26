@@ -4,6 +4,7 @@ export * from './Radio';
 export * from './Toast';
 export * from './Button';
 export * from './Toggle';
+export * from './Avatar';
 export * from './Checkbox';
 export * from './Dropdown';
 export * from './TextInput';

@@ -1,7 +1,7 @@
 import {
   useRequestVerifyEmailCode,
   useConfirmVerification,
-} from '../../../utils/hooks';
+} from '../../../hooks';
 import { navigate } from '../../../navigation/utils';
 import { ROUTES } from '../../../navigation/params';
 import { VerificationPurpose } from '../../../config/constants';

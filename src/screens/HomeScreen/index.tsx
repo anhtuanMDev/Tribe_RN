@@ -7,15 +7,13 @@ import { navigate } from '../../navigation/utils';
 import { ROUTES } from '../../navigation/params';
 
 function HomeScreen() {
-  const signin = () => {
-    // toast.warning({ title: 'Bottom toast', position: 'bottom' });
-    navigate(ROUTES.FLOW_CREDENTAIL, {
-      screen: ROUTES.SIGN_IN
-    })
-  }
+  const createPost = () => {
+    navigate(ROUTES.POST);
+  };
+
   return (
     <SafeAreaView style={[styles.container]}>
-      <Button title="Sign In" level="primary" onPress={signin} />
+      <Button title="Create Post" level="primary" onPress={createPost} />
     </SafeAreaView>
   );
 }

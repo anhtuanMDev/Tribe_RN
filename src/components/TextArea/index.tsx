@@ -9,6 +9,7 @@ import {
   Platform,
   NativeSyntheticEvent,
   TextInputContentSizeChangeEventData,
+  ViewProps,
 } from 'react-native';
 import Animated, {
   useSharedValue,
@@ -19,6 +20,8 @@ import Animated, {
   interpolateColor,
   Easing,
 } from 'react-native-reanimated';
+import { pallet } from '../../config/pallet';
+import { Icon } from '../Icon';
 
 // ─────────────────────────────────────────────
 // Types
@@ -45,6 +48,8 @@ export interface AnimatedTextAreaProps
   onChangeText?: (text: string) => void;
   onFocus?: () => void;
   onBlur?: () => void;
+  style?: ViewProps['style'];
+  inputStyle?: TextInputProps['style'];
 }
 
 // ─────────────────────────────────────────────
@@ -95,7 +100,8 @@ const TextArea = React.forwardRef<TextInput, AnimatedTextAreaProps>(
       onChangeText,
       onFocus,
       onBlur,
-      style,
+      style: containerStyle,
+      inputStyle,
       ...rest
     },
     ref,
@@ -122,7 +128,7 @@ const TextArea = React.forwardRef<TextInput, AnimatedTextAreaProps>(
         if (!autoGrow) return;
         const newHeight = Math.min(
           Math.max(
-            e.nativeEvent.contentSize.height + PADDING_VERTICAL * 2,
+            e.nativeEvent.contentSize.height + PADDING_VERTICAL,
             minHeight,
           ),
           maxHeight,
@@ -176,19 +182,10 @@ const TextArea = React.forwardRef<TextInput, AnimatedTextAreaProps>(
     React.useEffect(() => {
       if (isError) {
         errorOpacity.value = withTiming(1, { duration: 200 });
-        shakeOffset.value = withSpring(0, SPRING_CONFIG, () => {
-          shakeOffset.value = withSpring(8, SPRING_CONFIG, () => {
-            shakeOffset.value = withSpring(-8, SPRING_CONFIG, () => {
-              shakeOffset.value = withSpring(4, SPRING_CONFIG, () => {
-                shakeOffset.value = withSpring(0, SPRING_CONFIG);
-              });
-            });
-          });
-        });
       } else {
         errorOpacity.value = withTiming(0, { duration: 200 });
       }
-    }, [isError, shakeOffset, errorOpacity]);
+    }, [isError, errorOpacity]);
 
     // ── Animated styles ──────────────────────
     const containerAnimStyle = useAnimatedStyle(() => ({
@@ -200,12 +197,18 @@ const TextArea = React.forwardRef<TextInput, AnimatedTextAreaProps>(
         focusProgress.value,
         [0, 1],
         [
-          isError ? COLORS.borderError : COLORS.border,
-          isError ? COLORS.borderError : COLORS.borderFocused,
+          isError ? pallet.error : pallet.variant.neutral['300'],
+          isError ? pallet.error : pallet.primary,
         ],
       );
       const borderWidth = interpolate(focusProgress.value, [0, 1], [1, 2]);
-      return { borderColor, borderWidth };
+      const padding = interpolate(focusProgress.value, [0, 1], [1, 0]);
+      return {
+        borderColor,
+        borderWidth,
+        backgroundColor: pallet.background,
+        padding,
+      };
     });
 
     const labelAnimStyle = useAnimatedStyle(() => {
@@ -251,13 +254,13 @@ const TextArea = React.forwardRef<TextInput, AnimatedTextAreaProps>(
 
     // ── Input height animation ───────────────
     const inputContainerAnimStyle = useAnimatedStyle(() => ({
-      height: autoGrow ? withSpring(inputHeight, SPRING_CONFIG) : undefined,
+      height: autoGrow ? withTiming(inputHeight) : undefined,
     }));
 
     return (
-      <View style={styles.wrapper}>
+      <View style={containerStyle}>
         {/* Shake + border container */}
-        <Animated.View style={[styles.fieldContainer, containerAnimStyle]}>
+        <Animated.View style={[containerAnimStyle]}>
           <Animated.View style={[styles.border, borderAnimStyle]}>
             {/* Floating label */}
             {label && (
@@ -291,7 +294,7 @@ const TextArea = React.forwardRef<TextInput, AnimatedTextAreaProps>(
                 style={[
                   styles.input,
                   label ? styles.inputWithLabel : undefined,
-                  style,
+                  inputStyle,
                 ]}
                 placeholderTextColor={COLORS.helper}
                 textAlignVertical="top"
@@ -302,7 +305,11 @@ const TextArea = React.forwardRef<TextInput, AnimatedTextAreaProps>(
             {/* Clear button */}
             <Animated.View style={[styles.clearButton, clearAnimStyle]}>
               <Pressable onPress={handleClear} hitSlop={8}>
-                <Text style={styles.clearIcon}>✕</Text>
+                <Icon
+                  name="close"
+                  size={24}
+                  color={pallet.variant.neutral['400']}
+                />
               </Pressable>
             </Animated.View>
           </Animated.View>
@@ -342,12 +349,6 @@ const TextArea = React.forwardRef<TextInput, AnimatedTextAreaProps>(
 export { TextArea };
 
 const styles = StyleSheet.create({
-  wrapper: {
-    width: '100%',
-  },
-  fieldContainer: {
-    width: '100%',
-  },
   border: {
     borderRadius: 10,
     backgroundColor: COLORS.background,
@@ -361,7 +362,7 @@ const styles = StyleSheet.create({
   },
   label: {
     position: 'absolute',
-    top: PADDING_VERTICAL,
+    top: PADDING_VERTICAL + 6,
     left: 14,
     fontSize: LABEL_FONT_SIZE,
     color: COLORS.label,
@@ -397,7 +398,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
-    marginTop: 6,
+    marginTop: 2,
     paddingHorizontal: 4,
   },
   footerLeft: {
